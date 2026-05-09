@@ -7,9 +7,9 @@ def main():
     with open('data/Customer.csv','r') as file:
         read = reader(file)
         data = []
-        namedtuple('Customer',next(read))
+        customer = namedtuple('Customer',next(read))
         for line in read:
-            data.append(*line)
+            data.append(customer(*line))
             # print(Customer(*line))
     print(data)
     return data
