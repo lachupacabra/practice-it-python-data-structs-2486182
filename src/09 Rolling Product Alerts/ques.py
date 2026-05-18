@@ -18,17 +18,32 @@ ORDER_EVENTS = [
 ]
 
 
-def rolling_product_alerts(events, window_size=6, surge_threshold=3):
+def rolling_product_window(events, window_size=6, surge_threshold=3):
     # TODO:
     # Use a deque as a fixed-size rolling window of recent events.
     # Track product counts inside the current window.
     # Whenever a product count reaches surge_threshold, append an alert dict:
     #   event_id, product_id, count_in_window, recent_event_ids
-    return []
+    window = deque(maxlen=window_size)
+    count = Counter()
+    alerts = []
+    for event in events:
+        window.append(event)
+        count[event.product_id] += 1
+        if count[event.product_id] >=surge_threshold:
+            alerts.append(
+                {
+                    "event_id": event.event_id,
+                    "product_id": event.product_id,
+                    "count_in_window": count[event.product_id],
+                    "recent_event_ids": [recent.event_id for recent in window],
+                }
+            )
+    return alerts
 
 
 def main():
-    pprint(rolling_product_alerts(ORDER_EVENTS, window_size=6, surge_threshold=3))
+    pprint(rolling_product_window(ORDER_EVENTS, window_size=6, surge_threshold=3))
     return
 
 
