@@ -2,11 +2,9 @@ from collections import deque
 
 
 def check_palindrome(word):
-    dq_word = deque(word.lower())
-    while len(dq_word) > 1:
-        if dq_word.pop() != dq_word.popleft():
-            return False
-    return True
+    # TODO:
+    # Use a deque to compare characters from both ends of the word.
+    return False
 
 
 def main():

@@ -16,14 +16,22 @@ task_queue = deque()
 
 
 def add_task(task):
-    task_queue.appendleft(task) if task.hasPriority else task_queue.append(task)
+    # TODO:
+    # Add priority tasks to the front and normal tasks to the back.
+    return
+
 
 def do_task():
-    return task_queue.popleft()
+    # TODO:
+    # Complete and return the next task from the front of the queue.
+    return None
+
 
 def print_queue():
-    for i,task in enumerate(task_queue,start=1):
-        print(f"{i} task :{task.taskDesc}  with {task.hasPriority} priority")
+    # TODO:
+    # Print the current tasks in queue order.
+    return
+
 
 def main():
     add_task(Task("make a list"))

@@ -3,23 +3,12 @@ from pprint import pprint
 
 
 def get_dict(items):
-    res = defaultdict(lambda:set())
-    for item in items:
-        cat = item.identifier[:3]
-        match cat:
-            case "STA":
-                res["starter"].add(item)
-            case "BEV":
-                res['beverage'].add(item)
-            case "ENT":
-                res['entree'].add(item)
-            case "DES":
-                res['desert'].add(item)
+    # TODO:
+    # Group food records into sets by category prefix.
+    return {}
 
-    return res
 
 def main():
-    #add code here
     Food = namedtuple("Food", ["identifier", "name"])
 
     nadias_list = [
@@ -56,6 +45,7 @@ def main():
     res = dict(get_dict(nadias_list))
     pprint(res)
     return res
+
 
 if __name__ == "__main__":
     main()
