@@ -5,6 +5,7 @@ def main():
     orders = ["DES003","STA002","ENT004","ENT001"]
     foods.extend(orders)
     foods.append("DES002")
+    foods.appendleft("DES005")
     print(foods)
     return
 

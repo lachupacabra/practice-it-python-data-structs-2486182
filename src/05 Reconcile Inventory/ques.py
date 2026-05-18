@@ -1,7 +1,6 @@
 from collections import Counter
 from pprint import pprint
 
-
 STARTING_INVENTORY = Counter(
     BANANA=24,
     APPLE=18,
@@ -23,7 +22,17 @@ def reconcile_inventory(starting, received, sold, spoiled, low_stock_threshold=5
     #   remaining_inventory: only products with positive inventory
     #   oversold_items: products whose final inventory went below zero
     #   low_stock_items: positive inventory at or below low_stock_threshold
-    return {}
+    starting.update(received)
+    starting.subtract(sold)
+    starting.subtract(spoiled)
+    remaining_inventory = {k: v for k, v in starting.items() if v > 0}
+    oversold_items = {k: v for k, v in starting.items() if v < 0}
+    low_stock_items = {k: v for k, v in starting.items() if v <= low_stock_threshold}
+    return {
+        "remaining_inventory": remaining_inventory,
+        "oversold_items": oversold_items,
+        "low_stock_items": low_stock_items,
+    }
 
 
 def main():
