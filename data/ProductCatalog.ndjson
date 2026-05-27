@@ -1,0 +1,3 @@
+{"product_id": "P001", "name": "Organic Bananas", "category": {"department": "produce", "aisle": "fruit"}, "attributes": {"brand": "Nadias", "organic": true}, "prices": [{"store_id": "S001", "price": 2.99}, {"store_id": "S002", "price": 3.19}]}
+{"product_id": "P002", "name": "Coconut Yogurt", "category": {"department": "dairy", "aisle": "yogurt"}, "attributes": {"brand": "Cloud Spoon", "organic": false}, "prices": [{"store_id": "S001", "price": 4.49}]}
+{"product_id": "P003", "name": "Basil Soup", "category": {"department": "prepared", "aisle": "soup"}, "attributes": {"brand": "Garden Bowl", "organic": false}, "prices": [{"store_id": "S002", "price": 5.99}, {"store_id": "S003", "price": 6.25}]}

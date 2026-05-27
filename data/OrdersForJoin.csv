@@ -1,0 +1,9 @@
+OrderID,CustomerID,OrderTotal,OrderStatus
+O7001,C101,42.50,completed
+O7002,C102,108.25,completed
+O7003,C999,19.99,completed
+O7004,C103,64.00,canceled
+O7005,C104,159.00,completed
+O7006,C105,23.75,completed
+O7007,C102,77.40,refunded
+O7008,C101,35.10,completed

@@ -1,0 +1,9 @@
+ChangeID,CustomerID,Operation,UpdatedAt,Email
+CH001,C101,insert,2026-05-01T08:00:00,avery@example.com
+CH002,C102,insert,2026-05-01T08:10:00,brianna@example.com
+CH003,C101,update,2026-05-01T09:45:00,avery.stone@example.com
+CH004,C103,insert,2026-05-01T10:05:00,carlos@example.net
+CH005,C102,update,2026-05-01T10:30:00,b.lee@example.com
+CH006,C104,insert,2026-05-01T11:00:00,dev@example.org
+CH007,C103,delete,2026-05-01T11:35:00,carlos@example.net
+CH008,C105,insert,2026-05-01T12:20:00,emi@example.com

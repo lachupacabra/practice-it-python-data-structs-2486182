@@ -34,7 +34,25 @@ def audit_order_lines(lines, known_prefixes):
     #   "anomalies": normal dict of reason -> list of OrderLine records,
     #   "quantities_by_product": normal dict of product_id -> quantity
     # }
-    return {}
+    aggs = defaultdict(int)
+    errors = defaultdict(list)
+    order_item_ids = []
+    for line in lines:
+        if line.order_item_id in order_item_ids:
+            errors["duplicate_order_item_id"].append(line)
+        elif line.quantity <=0:
+            errors["non_positive_quantity"].append(line)
+        elif line.product_id[:3] not in KNOWN_PREFIXES:
+            errors["unknown_product_prefix"].append(line)
+        elif line.quantity >10:
+            errors["unusually_large_quantity"].append(line)
+            aggs[line.product_id] += line.quantity
+        else:
+            aggs[line.product_id] += line.quantity
+        order_item_ids.append(line.order_item_id)
+
+    return {"anomalies": dict(errors),
+            "quantities_by_product": dict(aggs)}
 
 
 def main():

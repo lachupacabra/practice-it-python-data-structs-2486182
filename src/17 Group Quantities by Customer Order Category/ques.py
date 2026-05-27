@@ -1,8 +1,9 @@
 from collections import defaultdict, namedtuple
 from pprint import pprint
 
-
-OrderLine = namedtuple("OrderLine", ["customer_id", "order_id", "product_id", "quantity"])
+OrderLine = namedtuple(
+    "OrderLine", ["customer_id", "order_id", "product_id", "quantity"]
+)
 
 ORDER_LINES = [
     OrderLine(100, 1001, "STA001", 2),
@@ -27,7 +28,8 @@ def get_category(product_id):
     # TODO:
     # Return a human-readable category from the first three letters
     # of product_id. Return "unknown" when the prefix is missing.
-    return ""
+
+    return CATEGORY_NAMES.get(product_id[:3], "unknown")
 
 
 def group_quantities(lines):
@@ -35,7 +37,20 @@ def group_quantities(lines):
     # Use nested defaultdict objects to build:
     # customer_id -> order_id -> category -> total quantity.
     # Return a regular dict when done.
-    return {}
+    grouped = defaultdict(lambda: defaultdict(lambda: defaultdict(int)))
+    for line in lines:
+        cat = get_category(line.product_id)
+        grouped[line.customer_id][line.order_id][cat] += line.quantity
+
+    return {
+        cid: {oid: dict(cat) for oid, cat in orders.items()}
+        for cid, orders in grouped.items()
+    }
+
+
+"""
+{customer_id: {order_Id: {cat1:1,cat2:4}}}
+"""
 
 
 def main():

@@ -32,7 +32,9 @@ def parse_event(raw_event):
     # TODO:
     # Convert a tuple like ("D1001", "accepted", "2026-04-28T09:00:00")
     # into a DeliveryEvent with a datetime timestamp.
-    return None
+    id,status,timestamp = raw_event
+    timestamp_formatted = datetime.fromisoformat(timestamp)
+    return DeliveryEvent(id, status, timestamp_formatted)
 
 
 def find_invalid_transitions(events):
@@ -41,13 +43,26 @@ def find_invalid_transitions(events):
     # Return a list of dictionaries describing invalid transitions.
     # A status is invalid if it moves backward in STATUS_RANK or happens
     # after delivered/canceled.
-    return []
+    invalid_transactions = []
+    last_event_by_delivery = {}
+
+    sorted_events = sorted(events, key = lambda item: (item.delivery_id, item.timestamp))
+    for event in sorted_events:
+        previous_event = last_event_by_delivery.get(event.delivery_id)
+        if previous_event is not None:
+            if STATUS_RANK[event.status] < STATUS_RANK[previous_event.status]:
+                invalid_transactions.append({event.delivery_id:event.status})
+            if previous_event.status in ['delivered','cancelled']:
+                invalid_transactions.append({event.delivery_id: event.status})
+        last_event_by_delivery[event.delivery_id] = event
+
+    return invalid_transactions
 
 
 def update_status(event, new_status):
     # TODO:
     # namedtuple records are immutable, so return a copy with _replace.
-    return event
+    return event._replace(status=new_status)
 
 
 def main():

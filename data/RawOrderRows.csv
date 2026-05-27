@@ -1,0 +1,9 @@
+OrderID,CustomerID,OrderTotal,Status,OrderDate
+O8001,C101,45.20,completed,2026-05-01
+O8002,C102,-8.00,completed,2026-05-01
+O8003,,19.99,completed,2026-05-02
+O8004,C103,abc,completed,2026-05-02
+O8005,C104,77.50,shipped,2026-05-03
+O8006,C105,12.75,canceled,2026-05-03
+O8007,C106,100.00,refunded,bad-date
+O8008,C107,33.30,completed,2026-05-04

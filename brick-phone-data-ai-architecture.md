@@ -34,6 +34,7 @@ The result is intentionally pragmatic. Brick Phone gets a scalable foundation wi
 | --- | --- |
 | Company stage | Early to growth-stage startup with a small but senior data team |
 | Event volume | Starts in the low millions of events per day, designed to scale to hundreds of millions |
+| Data growth planning | Plan for telemetry and retained analytical data to grow 30% to 40% annually, with quarterly capacity reviews |
 | Latency needs | Sub-second to seconds for application context, minutes for dashboards, hours for deep historical jobs |
 | Cloud | AWS primary cloud |
 | Primary platform | Databricks lakehouse on AWS |
@@ -93,8 +94,9 @@ flowchart LR
   CHAT --> SDK
   SDK --> GATEWAY
   GATEWAY --> REG
-  REG --> KAFKA1
-  REG --> KAFKA2
+  REG -. schema check .-> GATEWAY
+  GATEWAY --> KAFKA1
+  GATEWAY --> KAFKA2
   KAFKA1 --> S3RAW
   KAFKA2 --> S3PII
   S3RAW --> BRONZE
@@ -475,6 +477,7 @@ flowchart TB
 - Monitor cost by team, pipeline, cluster, catalog, and workload tag in Datadog and cloud billing exports.
 - Use incremental dbt models and Delta optimizations rather than full refreshes by default.
 - Reserve always-on compute only for truly low-latency services such as the context API.
+- Reforecast Kafka partitions, S3/Delta storage, Databricks job clusters, and dashboard warehouse capacity quarterly against the 30% to 40% annual data-growth planning assumption.
 
 ### Observability
 

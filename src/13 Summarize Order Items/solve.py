@@ -1,7 +1,7 @@
 from collections import namedtuple
 from csv import DictReader
 from pprint import pprint
-
+from pathlib import Path
 
 Customer = namedtuple("Customer", ["customer_id", "full_name", "email", "email_domain", "zipcode"])
 OrderItem = namedtuple("OrderItem", ["order_item_id", "order_id", "product_id", "quantity"])
@@ -49,8 +49,12 @@ def get_total_quantity_by_product(order_items):
 
 
 def main():
-    customers = read_customers("data/Customer.csv")
-    order_items = read_order_items("data/OrderItems.csv")
+    current_dir = Path(__file__).resolve().parent
+
+    # print(current_dir.parent)
+    csv_dir = current_dir.parent.parent
+    customers = read_customers(csv_dir / "data/Customer.csv")
+    order_items = read_order_items(csv_dir / "data/OrderItems.csv")
 
     pprint(customers[:3])
     pprint(order_items[:3])

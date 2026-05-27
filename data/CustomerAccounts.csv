@@ -1,0 +1,6 @@
+CustomerID,FullName,Email,Segment
+C101,Avery Stone,avery@example.com,standard
+C102,Brianna Lee,brianna@example.com,premium
+C103,Carlos Vega,carlos@example.net,standard
+C104,Dev Patel,dev@example.org,premium
+C105,Emi Tanaka,emi@example.com,standard
